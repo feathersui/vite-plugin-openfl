@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm ci
+          npm pack
+        env:
+          CI: true
+      - uses: actions/upload-artifact@v3
+        with:
+          name: vite-plugin-openfl
+          path: vite-plugin-openfl-*.tgz
+          if-no-files-found: error
+      - run: npm link
+      - uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.2.5
+      - run: |
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib install genes --quiet
+      - name: Build samples/basic
+        working-directory: samples/basic
+        run: |
+          npm link vite-plugin-openfl
+          npm install
+          npm run build
+      # - name: Build samples/genes
+      #   working-directory: samples/genes
+      #   run: |
+      #     npm link vite-plugin-openfl
+      #     npm install
+      #     npm run build

@@ -1,0 +1,14 @@
+{
+  "name": "vite-plugin-openfl-genes-sample",
+  "version": "1.0.0",
+  "description": "Sample that demonstrates how to use Genes with vite-plugin-openfl",
+  "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
+  "devDependencies": {
+    "vite": "^2.9.13",
+    "vite-plugin-openfl": "^1.0.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  }
+}

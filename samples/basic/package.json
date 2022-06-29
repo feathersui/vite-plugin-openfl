@@ -1,0 +1,14 @@
+{
+  "name": "vite-plugin-openfl-basic-sample",
+  "version": "1.0.0",
+  "description": "A basic sample to demonstrate vite-plugin-openfl",
+  "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
+  "devDependencies": {
+    "vite": "^2.9.13",
+    "vite-plugin-openfl": "^1.0.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  }
+}
