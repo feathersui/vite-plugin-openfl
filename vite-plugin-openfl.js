@@ -9,7 +9,7 @@ module.exports = function openflPlugin() {
     name: "openfl",
     handleHotUpdate(ctx) {
       if (ctx.file.endsWith(".hx")) {
-        //if a Haxe source file changes, restart the server
+        // if a Haxe source file changes, restart the server
         ctx.server.restart();
       }
     },
@@ -80,7 +80,10 @@ module.exports = function openflPlugin() {
       const haxelibs = getHaxelibs(projectXml);
       const usesGenes = haxelibs.includes("genes");
 
-      const isServeCommand = config.command === "serve";
+      // if using rollup, instead of vite, configResolved() won't be called,
+      // so the config variable will not get set. that's fine, though. we can
+      // assume that we're building and not serving.
+      const isServeCommand = !config || config.command === "serve";
       const projectDir = path.dirname(id);
       const mode = isServeCommand ? "-debug" : "-release";
       const templateDir = path.join(

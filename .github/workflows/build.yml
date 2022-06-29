@@ -48,3 +48,9 @@ jobs:
       #     npm link vite-plugin-openfl
       #     npm install
       #     npm run build
+      # - name: Build samples/rollup
+      #   working-directory: samples/rollup
+      #   run: |
+      #     npm link vite-plugin-openfl
+      #     npm install
+      #     npm run build
