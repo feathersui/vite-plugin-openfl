@@ -129,6 +129,15 @@ module.exports = function openflPlugin() {
   };
 };
 
+function isInXMLComment(projectXML, index) {
+  const startCommentIndex = projectXML.lastIndexOf("<!--", index);
+  if (startCommentIndex == -1) {
+    return false;
+  }
+  const endCommentIndex = projectXML.indexOf("-->", startCommentIndex + 4);
+  return endCommentIndex > index;
+}
+
 function getHaxelibs(projectXML) {
   const haxelibRegExp = /<haxelib\s+name=\"(.*?)\".*?\/>/g;
   let haxelibElement = haxelibRegExp.exec(projectXML);
@@ -138,7 +147,9 @@ function getHaxelibs(projectXML) {
   const haxelibs = [];
   while (haxelibElement) {
     const haxelib = haxelibElement[1];
-    haxelibs.push(haxelib);
+    if (!isInXMLComment(projectXML, haxelibElement.index)) {
+      haxelibs.push(haxelib);
+    }
     haxelibElement = haxelibRegExp.exec(projectXML);
   }
   return haxelibs;
