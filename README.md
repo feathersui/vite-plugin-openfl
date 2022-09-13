@@ -40,7 +40,7 @@ export default defineConfig({
 });
 ```
 
-To start a local development server, run the following command. Then, open _http://localhost:3000/_ in a web browser.
+To start a local development server, run the following command. Then, open _http://localhost:5173/_ in a web browser.
 
 ```sh
 npm start

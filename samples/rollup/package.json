@@ -4,7 +4,7 @@
   "description": "Sample that demonstrates how to use vite-plugin-openfl with Rollup",
   "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
   "devDependencies": {
-    "rollup": "^2.75.7",
+    "rollup": "^2.79.0",
     "rollup-plugin-copy": "^3.4.0",
     "vite-plugin-openfl": "^1.0.0"
   },
