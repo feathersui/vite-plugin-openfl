@@ -1,7 +1,8 @@
 import openfl from "vite-plugin-openfl";
 import copy from "rollup-plugin-copy";
+import { defineConfig } from "rollup";
 
-export default {
+export default defineConfig({
   context: "window",
   input: "project.xml",
   output: {
@@ -15,4 +16,4 @@ export default {
       targets: [{ src: "public/**/*", dest: "dist" }],
     }),
   ],
-};
+});

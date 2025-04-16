@@ -17,5 +17,4 @@
 	<source path="src"/>
 	
 	<haxelib name="openfl"/>
-	<haxelib name="genes"/>
 </project>
