@@ -28,7 +28,7 @@ jobs:
       - run: npm link
       - uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.2.5
+          haxe-version: 4.3.6
       - name: Install Haxelib dependencies
         run: |
           haxelib install lime --quiet
