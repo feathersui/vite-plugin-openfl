@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-openfl",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Vite plugin for OpenFL",
   "license": "MIT",
   "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
@@ -10,17 +10,21 @@
   "author": "Josh Tynjala",
   "keywords": [
     "vite",
-    "OpenFL"
+    "vite-plugin",
+    "rollup-plugin",
+    "OpenFL",
+    "haxe"
   ],
-  "main": "./vite-plugin-openfl.js",
+  "type": "module",
+  "main": "./vite-plugin-openfl.mjs",
   "files": [
-    "vite-plugin-openfl.js"
+    "vite-plugin-openfl.mjs"
   ],
   "peerDependencies": {
-    "vite": "^3.1.0"
+    "vite": "^6.3.0"
   },
   "engines": {
-    "node": ">=14.18 <15.x || >=16.x"
+    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
   },
   "scripts": {}
 }

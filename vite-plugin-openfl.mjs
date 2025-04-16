@@ -1,9 +1,9 @@
-const child_process = require("node:child_process");
-const fs = require("node:fs");
-const path = require("node:path");
-const vite = require("vite");
+import child_process from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+import { createLogger } from "vite";
 
-module.exports = function openflPlugin() {
+export default function openflPlugin() {
   /** @type vite.ResolvedConfig */ let config = null;
   return {
     name: "openfl",
@@ -97,9 +97,9 @@ module.exports = function openflPlugin() {
         id,
         "html5",
         mode,
-        `--template=${path.resolve(__dirname, templateDir)}`,
+        `--template=${path.resolve(import.meta.dirname, templateDir)}`,
       ]);
-      const logger = vite.createLogger("info");
+      const logger = createLogger("info");
       result.output.forEach((line) => {
         if (!line) {
           return;
@@ -127,7 +127,7 @@ module.exports = function openflPlugin() {
       };
     },
   };
-};
+}
 
 function isInXMLComment(projectXML, index) {
   const startCommentIndex = projectXML.lastIndexOf("<!--", index);
