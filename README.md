@@ -2,6 +2,8 @@
 
 A custom plugin to build [OpenFL](https://openfl.org) (and [Feathers UI](https://feathersui.com/)) projects with [Vite](http://vitejs.dev).
 
+> _Warning!_ This plugin does not work correctly with the latest version of Vite. It was last known to be working with Vite 3.1.0.
+
 ## Usage
 
 Create a new directory for your project.
