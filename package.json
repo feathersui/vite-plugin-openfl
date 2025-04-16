@@ -21,7 +21,7 @@
     "vite-plugin-openfl.mjs"
   ],
   "peerDependencies": {
-    "vite": "^6.3.0"
+    "vite": ">=6.3.0"
   },
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
