@@ -86,10 +86,17 @@ export default function openflPlugin() {
       const isServeCommand = !config || config.command === "serve";
       const projectDir = path.dirname(id);
       const mode = isServeCommand ? "-debug" : "-release";
-      const templateDir = path.join(
-        "templates",
-        usesGenes ? "genes" : "default"
+      const templateDir = path.resolve(
+        import.meta.dirname,
+        path.join("templates", usesGenes ? "genes" : "default")
       );
+      if (
+        !fs.existsSync(templateDir) ||
+        !fs.statSync(templateDir).isDirectory()
+      ) {
+        this.error("Cannot find Lime templates: " + templateDir);
+        return;
+      }
       const result = child_process.spawnSync("haxelib", [
         "run",
         "lime",
@@ -97,7 +104,7 @@ export default function openflPlugin() {
         id,
         "html5",
         mode,
-        `--template=${path.resolve(import.meta.dirname, templateDir)}`,
+        `--template=${templateDir}`,
       ]);
       const logger = createLogger("info");
       result.output.forEach((line) => {
