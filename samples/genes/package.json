@@ -4,8 +4,8 @@
   "description": "Sample that demonstrates how to use Genes with vite-plugin-openfl",
   "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
   "devDependencies": {
-    "vite": "^6.3.0",
-    "vite-plugin-openfl": "^2.0.0"
+    "vite": "^7.2.7",
+    "vite-plugin-openfl": "^2.0.1"
   },
   "scripts": {
     "start": "vite",
