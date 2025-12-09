@@ -18,7 +18,8 @@
   "type": "module",
   "main": "./vite-plugin-openfl.mjs",
   "files": [
-    "vite-plugin-openfl.mjs"
+    "vite-plugin-openfl.mjs",
+    "templates"
   ],
   "peerDependencies": {
     "vite": ">=6.3.0"
