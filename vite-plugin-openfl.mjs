@@ -71,7 +71,9 @@ export default function openflPlugin() {
         const absoluteSource = path.resolve(outDir, source);
         if (fs.existsSync(absoluteSource)) {
           return {
-            id: absoluteSource,
+            // force / on all platforms, including windows
+            // otherwise, there may be duplicates of some modules
+            id: absoluteSource.replaceAll(path.sep, path.posix.sep),
           };
         }
       }
