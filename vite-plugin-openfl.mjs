@@ -3,8 +3,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { createLogger } from "vite";
 
+/**
+ * @import {Plugin} from "vite"
+ * @import {ResolvedConfig} from "vite"
+ */
+
+/**
+ * @returns {Plugin}
+ */
 export default function openflPlugin() {
-  /** @type vite.ResolvedConfig */ let config = null;
+  /** @type {ResolvedConfig} */ let config = null;
   return {
     name: "openfl",
     handleHotUpdate(ctx) {
