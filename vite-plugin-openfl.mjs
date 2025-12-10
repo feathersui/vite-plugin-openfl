@@ -51,7 +51,7 @@ export default function openflPlugin() {
       config = resolvedConfig;
     },
     resolveId(source, importer) {
-      if (!/\/project\.xml$/.test(importer)) {
+      if (!/[\/\\]project\.xml$/.test(importer)) {
         return;
       }
 
@@ -79,7 +79,7 @@ export default function openflPlugin() {
       }
     },
     transform(code, id, options) {
-      if (!/\/project\.xml$/.test(id)) {
+      if (!/[\/\\]project\.xml$/.test(id)) {
         return;
       }
 
