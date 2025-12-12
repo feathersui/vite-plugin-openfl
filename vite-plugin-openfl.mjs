@@ -51,9 +51,11 @@ export default function openflPlugin() {
       config = resolvedConfig;
     },
     resolveId(source, importer) {
-      if (!/[\/\\]project\.xml$/.test(importer)) {
+      const matched = /([\/\\])project\.xml$/.exec(importer);
+      if (!matched) {
         return;
       }
+      const sep = matched[1];
 
       const hxml = getHXML(importer);
       if (!hxml) {
@@ -71,9 +73,12 @@ export default function openflPlugin() {
         const absoluteSource = path.resolve(outDir, source);
         if (fs.existsSync(absoluteSource)) {
           return {
-            // force / on all platforms, including windows
-            // otherwise, there may be duplicates of some modules
-            id: absoluteSource.replaceAll(path.sep, path.posix.sep),
+            // vite and rollup provide different default ids on windows.
+            // vite always normalizes to forward slash, but rollup does not,
+            // so detect the correct separator to use from the importer.
+            // this is to ensure that the ids returned for imports in the entry
+            // point match the ids for those same imports in other files.
+            id: absoluteSource.replaceAll(/[\/\\]/g, sep),
           };
         }
       }
