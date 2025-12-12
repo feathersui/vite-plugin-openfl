@@ -51,6 +51,8 @@ export default function openflPlugin() {
       config = resolvedConfig;
     },
     resolveId(source, importer) {
+      // we need to resolve the ids for imports in the entry point
+      // for everything else, we should keep Vite's default ids
       const matched = /([\/\\])project\.xml$/.exec(importer);
       if (!matched) {
         return;
