@@ -13,6 +13,7 @@ import { createLogger } from "vite";
  */
 export default function openflPlugin() {
   /** @type {ResolvedConfig} */ let config = null;
+  /** @type {string | null} */ let outDir = null;
   return {
     name: "openfl",
     handleHotUpdate(ctx) {
@@ -51,24 +52,34 @@ export default function openflPlugin() {
       config = resolvedConfig;
     },
     resolveId(source, importer) {
-      if (!/[\/\\]project\.xml$/.test(importer)) {
+      if (!importer || path.isAbsolute(source)) {
         return;
       }
 
-      const hxml = getHXML(importer);
-      if (!hxml) {
-        cb(new Error("Command `lime display html5` failed."));
-        return;
+      // Initialize outDir from project.xml
+      if (!outDir && /[\/\\]project\.xml$/.test(importer)) {
+        const hxml = getHXML(importer);
+        if (!hxml) {
+          cb(new Error("Command `lime display html5` failed."));
+          return;
+        }
+        const jsOutputPath = getJSOutputPath(hxml);
+        if (!jsOutputPath) {
+          cb(new Error("Failed to detect OpenFL html5 output file path."));
+          return;
+        }
+        const projectDir = path.dirname(importer);
+        outDir = path.dirname(path.resolve(projectDir, jsOutputPath))
+          .replaceAll(path.sep, path.posix.sep);
       }
-      const jsOutputPath = getJSOutputPath(hxml);
-      if (!jsOutputPath) {
-        cb(new Error("Failed to detect OpenFL html5 output file path."));
-        return;
-      }
-      const projectDir = path.dirname(importer);
-      const outDir = path.dirname(path.resolve(projectDir, jsOutputPath));
-      if (!path.isAbsolute(source)) {
-        const absoluteSource = path.resolve(outDir, source);
+
+      // Handle imports from project.xml or from modules within outDir
+      const posixImporter = importer.replaceAll(path.sep, path.posix.sep);
+      if (/[\/\\]project\.xml$/.test(importer) || posixImporter.startsWith(outDir)) {
+        const baseDir = /[\/\\]project\.xml$/.test(importer)
+          ? outDir
+          : path.dirname(posixImporter);
+        const absoluteSource = path.resolve(baseDir.replaceAll(path.posix.sep, path.sep), source);
         if (fs.existsSync(absoluteSource)) {
           return {
             // force / on all platforms, including windows
