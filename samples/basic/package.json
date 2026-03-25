@@ -4,7 +4,7 @@
   "description": "A basic sample to demonstrate vite-plugin-openfl",
   "repository": "https://github.com/feathersui/vite-plugin-openfl.git",
   "devDependencies": {
-    "vite": "^7.2.7",
+    "vite": "^8.0.2",
     "vite-plugin-openfl": "^2.0.3"
   },
   "scripts": {
